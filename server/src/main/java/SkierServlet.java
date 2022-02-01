@@ -33,7 +33,7 @@ public class SkierServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        System.out.println("POST");
     }
     private boolean isUrlValid(String[] urlPath) {
         return true;
