@@ -9,7 +9,9 @@ import java.io.IOException;
 public class SkierServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        res.setContentType("text/plain");
+        //res.setContentType("text/plain");
+        long rec_time = System.currentTimeMillis();
+        //System.out.println(rec_time);
         String urlPath = req.getPathInfo();
 
         // check we have a URL!
@@ -24,7 +26,6 @@ public class SkierServlet extends HttpServlet {
             res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         } else {
             res.setStatus(HttpServletResponse.SC_OK);
-            res.getWriter().write("It works now!");
         }
     }
 
@@ -50,7 +51,7 @@ public class SkierServlet extends HttpServlet {
                 body.append(line);
             }
             System.out.println(body);
-            res.getWriter().write("Post sent!");
+            //res.getWriter().write("Post sent!");
         }
     }
     private boolean isUrlValid(String[] urlPath) {
