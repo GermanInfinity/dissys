@@ -1,6 +1,7 @@
 package io.swagger.client.model;
 import java.util.Random;
 
+import com.google.gson.JsonObject;
 import io.swagger.client.ApiClient;
 import io.swagger.client.ApiException;
 import io.swagger.client.ApiResponse;
@@ -14,15 +15,22 @@ public class Client {
             for (int i = 0; i < posts_to_send; i++) {
                 Random ran = new Random();
                 Integer random_skier_ID = ran.nextInt(skier_range_max) + skier_range_min;
+                Integer random_time_range = ran.nextInt(time_end) + time_start;
                 Integer random_lift_ID = ran.nextInt(liftID) + 5;
-                ApiResponse res = api.writeNewLiftRideWithHttpInfo(null, null, null, null, random_skier_ID);
+                Integer random_wait_time = ran.nextInt(10) + 0;
+                LiftRide body = new LiftRide();
+                body.setTime(random_time_range);
+                body.setLiftID(random_lift_ID);
+                body.setWaitTime(random_wait_time);
+
+                ApiResponse res = api.writeNewLiftRideWithHttpInfo(body, null, null, null, random_skier_ID);
                 requests += 1;
                 Boolean success = false;
 
                 if (res.getStatusCode() > 399 || res.getStatusCode() < 600) {
                     Integer num_tries = 5;
                     while (num_tries > 0) {
-                        res = api.writeNewLiftRideWithHttpInfo(null, null, null, null, random_skier_ID);
+                        res = api.writeNewLiftRideWithHttpInfo(body, null, null, null, random_skier_ID);
                         requests += 1;
                         if (res.getStatusCode() == 200 || res.getStatusCode() == 201) {
                             success = true;
