@@ -85,7 +85,8 @@ public class Client {
          }
 
          // API Endpoints
-         String base_path = "http://ec2-52-90-170-195.compute-1.amazonaws.com:8080/server_war";
+         //String base_path = "http://ec2-52-90-170-195.compute-1.amazonaws.com:8080/server_war";
+         String base_path = "http://localhost.com:8080/server_war";
          SkiersApi apiInstance = new SkiersApi();
          Integer resortID = 56; // Integer | ID of the resort
          String seasonID = "56"; // String | ID of the season
@@ -105,6 +106,8 @@ public class Client {
          Double posts_to_send_1 = numRuns * 0.2 * (skier_num / launch);
          Double posts_to_send_2 = numRuns * 0.6 * (skier_num / launch);
          Double posts_to_send_3 = numRuns * 0.1;
+         Boolean phase_2_completed = false;
+         Boolean phase_3_completed = false;
 
          long start_phase = System.currentTimeMillis();
          for (int i = 0; i < launch; i++) {
@@ -115,7 +118,7 @@ public class Client {
                  Integer skier_range_min = (numThreads * i) + 1;
                  Integer skier_range_max = numThreads * (1 + i);
 
-                 Runnable t = () -> { action.connect(apiInstance, posts_to_send_1, skier_range_min,skier_range_max,lifts,start_time,end_time,successes,no_successes, requests); };
+                 Runnable t = () -> { action.connect(apiInstance, posts_to_send_1,skier_range_min,skier_range_max,lifts,start_time,end_time,successes,no_successes, requests); };
                  Thread var =  new Thread(t);
                  var.start();
                  var.join();
@@ -132,7 +135,7 @@ public class Client {
                  var.join();
              }
 
-             if (i >= 0.20 * launch) {
+             if (i >= 0.20 * launch && !phase_2_completed) {
                  for (int j = 0; j < numThreads; j++) {
                      if (j > 0) {
                          Integer start_time = 91;
@@ -157,7 +160,7 @@ public class Client {
                          var.join();
                      }
 
-                     if (j >= 0.20 * numThreads) {
+                     if (j >= 0.20 * numThreads && !phase_3_completed) {
                          for (int k = 0; k < 0.10 * numThreads; k++) {
                              if (k > 0) {
                                  Integer start_time = 361;
@@ -182,8 +185,10 @@ public class Client {
                                  var.join();
                              }
                          }
+                         phase_3_completed = true;
                      }
                  }
+                 phase_2_completed = true;
              }
          }
          long end_phase = System.currentTimeMillis();
