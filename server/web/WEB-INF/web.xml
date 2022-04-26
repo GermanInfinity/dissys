@@ -8,9 +8,80 @@
         <servlet-class>SkierServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>ResortsServlet</servlet-name>
+        <servlet-class>ResortsServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>PlainServlet</servlet-name>
+        <servlet-class>PlainServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>QueueServlet</servlet-name>
+        <servlet-class>QueueServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>CreateUserServlet</servlet-name>
+        <servlet-class>CreateUserServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>VideosServlet</servlet-name>
+        <servlet-class>VideosServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>PyServlet</servlet-name>
+        <servlet-class>org.python.util.PyServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PyServlet</servlet-name>
+        <url-pattern>*.py</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>VideosServlet</servlet-name>
+        <url-pattern>/videos/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>CreateUserServlet</servlet-name>
+        <url-pattern>/create_user/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login/*</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>SkierServlet</servlet-name>
         <url-pattern>/skiers/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ResortsServlet</servlet-name>
+        <url-pattern>/resorts/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>PlainServlet</servlet-name>
+        <url-pattern>/plain/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>QueueServlet</servlet-name>
+        <url-pattern>/queue/*</url-pattern>
     </servlet-mapping>
 
 
